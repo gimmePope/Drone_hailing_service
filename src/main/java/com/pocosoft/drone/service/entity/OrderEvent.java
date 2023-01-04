@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pocosoft.drone.service.constrait.EnumNamePattern;
 
 import lombok.Data;
@@ -33,9 +34,11 @@ public class OrderEvent {
 	private OrderState state = OrderState.RECEIVED;
 	@ElementCollection
 	@CollectionTable(name="ORDEREVENT_ITEMS", joinColumns=@JoinColumn(name="ORDER_ID"))
+	@JsonIgnore
 	private List<OrderItem> items;
 	@ManyToOne
 	@JoinColumn(name="deliveryEvent",referencedColumnName = "deliveryId")
+	@JsonIgnore
 	private DeliveryEvent delivery;
 	
 	
